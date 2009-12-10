@@ -2,15 +2,15 @@ using FluentNHibernate.Mapping;
 
 namespace YearToTorahVerse.Core.Mappings
 {
-    public class VerseInfoMap : ClassMap<VerseInfo>
+    public class VerseInfoMap : ClassMap<Verse>
     {
         public VerseInfoMap()
         {
-            Table("VerseInfo");
-            Id(c => c.VerseNumber).GeneratedBy.Assigned();
+            Table("Verses");
+            Id(c => c.VerseIndex).GeneratedBy.Assigned();
             Map(c => c.Book);
             Map(c => c.Chapter);
-            Map(c => c.Verse);
+            Map(c => c.VerseNumber);
             Map(c => c.HebrewScripture);
         }
     }

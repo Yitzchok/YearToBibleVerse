@@ -108,6 +108,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\VerseInfo.cs" />
+    <Compile Include="Core\Mappings\VerseInfoMap.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Presenters\SearchPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,8 +136,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Presenters\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YearToTorahVerse.Framework\YearToTorahVerse.Framework.csproj">
+      <Project>{20817834-F785-4132-9FCE-6AF452B01FE6}</Project>
+      <Name>YearToTorahVerse.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,6 +16,7 @@ using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using YearToTorahVerse.Core.Mappings;
+using YearToTorahVerse.Framework.Hebrew;
 
 namespace YearToTorahVerse
 {
@@ -60,7 +61,11 @@ namespace YearToTorahVerse
         {
 
             ISessionFactory dataSessionFactory = LoadDB();
-            container.Register(Component.For<ISessionFactory>().Named("MainDatabase").Instance(dataSessionFactory));
+
+            container.Register(
+                Component.For<IHebrewNumberConverter>().ImplementedBy<HebrewNumberConverter>().LifeStyle.Singleton,
+                Component.For<ISessionFactory>().Named("MainDatabase").Instance(dataSessionFactory)
+                );
 
         }
 
