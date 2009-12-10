@@ -37,7 +37,7 @@ namespace YearToTorahVerse.Core.Services
 
                         transaction.Commit();
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         transaction.Rollback();
                     }

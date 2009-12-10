@@ -42,11 +42,11 @@ namespace YearToTorahVerse
                 .WithAssemblies(Assembly.GetEntryAssembly())
                 .WithPresentationFramework()
                 .Start();
+
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
             var binder = container.Resolve<IBinder>();
             var viewStrategy = container.Resolve<IViewStrategy>();
 
@@ -56,8 +56,7 @@ namespace YearToTorahVerse
             binder.Bind(searchPresenter, view, null);
 
             MainWindow = view as Window;
-
-            //MainWindow.Show();
+            MainWindow.Show();
         }
 
         /// <summary>

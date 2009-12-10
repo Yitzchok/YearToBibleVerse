@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:verse="clr-namespace:YearToTorahVerse.Core" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	<DataTemplate x:Key="VerseTemplate" DataType="{x:Type verse:Verse}">
+		<Grid Width="403" Height="42">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" MinWidth="45.992"/>
+				<ColumnDefinition Width="Auto" MinWidth="66.937"/>
+				<ColumnDefinition Width="Auto" MinWidth="43.121"/>
+				<ColumnDefinition Width="Auto" MinWidth="44.698"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock VerticalAlignment="Center" Text="{Binding VerseIndex}" TextWrapping="Wrap" Grid.Column="0"/>
+			<TextBlock VerticalAlignment="Center" Text="{Binding Book}" TextWrapping="Wrap" Grid.Column="1"/>
+			<TextBlock VerticalAlignment="Center" Text="{Binding Chapter}" TextWrapping="Wrap" Grid.Column="2"/>
+			<TextBlock VerticalAlignment="Center" Text="{Binding VerseNumber}" TextWrapping="Wrap" Grid.Column="3"/>
+			<TextBlock VerticalAlignment="Stretch" Text="{Binding HebrewScripture}" TextWrapping="Wrap" Grid.Column="4"
+			HorizontalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="1"/>
+		</Grid>
+	</DataTemplate>
+	<!-- Resource dictionary entries should be defined here. -->
+</ResourceDictionary>

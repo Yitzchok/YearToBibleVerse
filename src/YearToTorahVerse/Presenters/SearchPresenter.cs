@@ -16,7 +16,7 @@ namespace YearToTorahVerse.Presenters
         public SearchPresenter(IYearToVerseSearchService searchService)
         {
             this.searchService = searchService;
-            jewishYear = new Observable<string>();
+            jewishYear = new Observable<string>("5770");
             Verses = new BindableCollection<Verse>();
         }
 
@@ -27,19 +27,28 @@ namespace YearToTorahVerse.Presenters
             set { jewishYear.Value = value; }
         }
 
-        IObservableCollection<Verse> Verses { get; set; }
+        public IObservableCollection<Verse> Verses { get; set; }
 
-        public IEnumerable<IResult> Save()
+        public IEnumerable<IResult> Search()
         {
             IList<Verse> verses = searchService.Search(int.Parse(JewishYear));
 
-            verses.Clear();
+            Verses.Clear();
             foreach (var verse in verses)
             {
                 Verses.Add(verse);
             }
 
             yield break;
+        }
+
+        public bool CanSearch
+        {
+            get
+            {
+                int hu;
+                return int.TryParse(JewishYear, out hu);
+            }
         }
     }
 }
