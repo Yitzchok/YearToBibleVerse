@@ -106,9 +106,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Services\YearToVerseSearchService.cs" />
+    <Compile Include="Infrastructure\Observable.cs" />
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\VerseInfo.cs" />
+    <Compile Include="Core\Verse.cs" />
     <Compile Include="Core\Mappings\VerseInfoMap.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Presenters\SearchPresenter.cs" />
@@ -135,14 +140,18 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\YearToTorahVerse.Framework\YearToTorahVerse.Framework.csproj">
       <Project>{20817834-F785-4132-9FCE-6AF452B01FE6}</Project>
       <Name>YearToTorahVerse.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

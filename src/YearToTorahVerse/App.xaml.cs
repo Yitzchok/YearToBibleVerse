@@ -73,7 +73,7 @@ namespace YearToTorahVerse
         {
             return Fluently.Configure().Database(() =>
                                                  SQLiteConfiguration
-                                                     .Standard.UsingFile(@"Books\Data.db")
+                                                     .Standard.UsingFile(@"VerseDatabase.db")
                                                      .ProxyFactoryFactory(proxyFactory)
                 ).ExposeConfiguration(c => new SchemaUpdate(c).Execute(false, true))
                 .Mappings(m => m.FluentMappings.Add<VerseInfoMap>())

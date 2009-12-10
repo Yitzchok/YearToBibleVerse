@@ -1,15 +1,41 @@
+using System.Collections.Generic;
+using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.ApplicationModel;
-using NHibernate;
+using YearToTorahVerse.Core;
+using YearToTorahVerse.Core.Services;
+using YearToTorahVerse.Infrastructure;
 
 namespace YearToTorahVerse.Presenters
 {
     public class SearchPresenter : Presenter
     {
-        readonly ISessionFactory sessionFactory;
+        readonly IYearToVerseSearchService searchService;
 
-        public SearchPresenter(ISessionFactory sessionFactory)
+        public SearchPresenter(IYearToVerseSearchService searchService)
         {
-            this.sessionFactory = sessionFactory;
+            this.searchService = searchService;
+            jewishYear = new Observable<string>();
+            Verses = new BindableCollection<Verse>();
+        }
+
+        Observable<string> jewishYear;
+        public string JewishYear
+        {
+            get { return jewishYear.Value; }
+            set { jewishYear.Value = value; }
+        }
+
+        IObservableCollection<Verse> Verses { get; set; }
+
+        public void Save()
+        {
+            IList<Verse> verses = searchService.Search(int.Parse(JewishYear));
+
+            verses.Clear();
+            foreach (var verse in verses)
+            {
+                Verses.Add(verse);
+            }
         }
     }
 }
