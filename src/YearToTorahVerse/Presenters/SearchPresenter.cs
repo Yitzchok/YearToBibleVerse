@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Caliburn.Core.Metadata;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.ApplicationModel;
 using YearToTorahVerse.Core;
@@ -7,6 +8,7 @@ using YearToTorahVerse.Infrastructure;
 
 namespace YearToTorahVerse.Presenters
 {
+    [Singleton(typeof(SearchPresenter))]
     public class SearchPresenter : Presenter
     {
         readonly IYearToVerseSearchService searchService;
@@ -27,7 +29,7 @@ namespace YearToTorahVerse.Presenters
 
         IObservableCollection<Verse> Verses { get; set; }
 
-        public void Save()
+        public IEnumerable<IResult> Save()
         {
             IList<Verse> verses = searchService.Search(int.Parse(JewishYear));
 
@@ -36,6 +38,8 @@ namespace YearToTorahVerse.Presenters
             {
                 Verses.Add(verse);
             }
+
+            yield break;
         }
     }
 }

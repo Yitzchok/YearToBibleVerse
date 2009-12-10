@@ -16,7 +16,9 @@ using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using YearToTorahVerse.Core.Mappings;
+using YearToTorahVerse.Core.Services;
 using YearToTorahVerse.Framework.Hebrew;
+using YearToTorahVerse.Presenters;
 
 namespace YearToTorahVerse
 {
@@ -40,7 +42,22 @@ namespace YearToTorahVerse
                 .WithAssemblies(Assembly.GetEntryAssembly())
                 .WithPresentationFramework()
                 .Start();
+        }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var binder = container.Resolve<IBinder>();
+            var viewStrategy = container.Resolve<IViewStrategy>();
+
+            var searchPresenter = container.Resolve<SearchPresenter>();
+
+            object view = viewStrategy.GetView(searchPresenter, null, null);
+            binder.Bind(searchPresenter, view, null);
+
+            MainWindow = view as Window;
+
+            //MainWindow.Show();
         }
 
         /// <summary>
@@ -64,6 +81,7 @@ namespace YearToTorahVerse
 
             container.Register(
                 Component.For<IHebrewNumberConverter>().ImplementedBy<HebrewNumberConverter>().LifeStyle.Singleton,
+                Component.For<IYearToVerseSearchService>().ImplementedBy<YearToVerseSearchService>(),
                 Component.For<ISessionFactory>().Named("MainDatabase").Instance(dataSessionFactory)
                 );
 

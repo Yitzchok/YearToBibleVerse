@@ -139,8 +139,13 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Content Include="VerseDatabase.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YearToTorahVerse.Framework\YearToTorahVerse.Framework.csproj">
       <Project>{20817834-F785-4132-9FCE-6AF452B01FE6}</Project>
