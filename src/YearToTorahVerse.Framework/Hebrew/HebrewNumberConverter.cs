@@ -7,95 +7,34 @@ namespace YearToTorahVerse.Framework.Hebrew
 {
     public class HebrewNumberConverter : IHebrewNumberConverter
     {
-        private IDictionary<char, int> hebrewChars = new Dictionary<char, int>();
-
-        public HebrewNumberConverter()
-        {
-            hebrewChars.Add('à', 1);
-            hebrewChars.Add('á', 2);
-            hebrewChars.Add('â', 3);
-            hebrewChars.Add('ã', 4);
-            hebrewChars.Add('ä', 5);
-            hebrewChars.Add('å', 6);
-            hebrewChars.Add('æ', 7);
-            hebrewChars.Add('ç', 8);
-            hebrewChars.Add('è', 9);
-            hebrewChars.Add('é', 10);
-            hebrewChars.Add('ë', 20);
-            hebrewChars.Add('ê', 20);
-            hebrewChars.Add('ì', 30);
-            hebrewChars.Add('î', 40);
-            hebrewChars.Add('í', 40);
-            hebrewChars.Add('ð', 50);
-            hebrewChars.Add('ï', 50);
-            hebrewChars.Add('ñ', 60);
-            hebrewChars.Add('ò', 70);
-            hebrewChars.Add('ô', 80);
-            hebrewChars.Add('ó', 80);
-            hebrewChars.Add('ö', 90);
-            hebrewChars.Add('õ', 90);
-            hebrewChars.Add('÷', 100);
-            hebrewChars.Add('ø', 200);
-            hebrewChars.Add('ù', 300);
-            hebrewChars.Add('ú', 400);
-        }
-
-        public string IntToHebrewNumber(int number)
-        {
-            IList<Char> numbers = number.ToString().ToList();
-
-            StringBuilder builder = new StringBuilder();
-
-            for (int i = 0; i < numbers.Count; i++)
-            {
-                var num = numbers[i];
-
-                int amountOfZeros = (numbers.Count - 1) - i;
-                int cleanedNumber = int.Parse(num + GenerateZeros(amountOfZeros));
-
-                if (cleanedNumber > 0)
-                {
-                    builder.Append(ExtractNumber(cleanedNumber));
-                }
-            }
-
-            return builder.ToString();
-        }
-
-        private string ExtractNumber(int smallNumber)
-        {
-            if (smallNumber > 400)
-            {
-                string charsToReturn = ExtractNumber((smallNumber / 400) * 400);
-
-                int leftOvers = smallNumber % 400;
-
-                if (leftOvers > 0)
-                {
-                    charsToReturn += ExtractNumber(leftOvers);
-                }
-
-                return charsToReturn;
-            }
-            else
-                return hebrewChars.First(c => c.Value == smallNumber).Key.ToString();
-        }
-
-        private string GenerateZeros(int amount)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            for (int i = 0; i < amount; i++)
-            {
-                builder.Append("0");
-            }
-
-            return builder.ToString();
-        }
+        private readonly IDictionary<char, int> hebrewChars =
+           new Dictionary<char, int>{
+              {'à', 1},{'á', 2},{'â', 3},{'ã', 4},{'ä', 5},{'å', 6},{'æ', 7},{'ç', 8},{'è', 9},{'é', 10},
+              {'ë', 20},{'ê', 20},{'ì', 30},{'î', 40},{'í', 40},{'ð', 50},{'ï', 50},{'ñ', 60},{'ò', 70},
+              {'ô', 80},{'ó', 80},{'ö', 90},{'õ', 90},{'÷', 100},{'ø', 200},{'ù', 300},{'ú', 400}
+           };
 
         public int HebrewNumberToInt(string hebrewNumber)
         {
             return hebrewNumber.Sum(letter => hebrewChars[letter]);
+        }
+
+        public string IntToHebrewNumber(int number)
+        {
+            var builder = new StringBuilder();
+
+            int tempNumber = number;
+            foreach (var hebrewChar in hebrewChars.Reverse()
+                .TakeWhile(hebrewChar => tempNumber > 0))
+            {
+                while (tempNumber >= hebrewChar.Value)
+                {
+                    builder.Append(hebrewChar.Key);
+                    tempNumber -= hebrewChar.Value;
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

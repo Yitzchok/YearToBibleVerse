@@ -1,5 +1,4 @@
 using Machine.Specifications;
-using Machine.Specifications.Model;
 using YearToTorahVerse.Framework.Hebrew;
 
 namespace YearToTorahVerse.Tests.FrameworkTests
@@ -19,11 +18,9 @@ namespace YearToTorahVerse.Tests.FrameworkTests
             result = converter.IntToHebrewNumber(770);
         };
 
-
         It should_be_the_correct_hebrew_number = () =>
         {
             result.ShouldEqual("תשע");
         };
-
     }
 }

@@ -25,5 +25,4 @@ namespace YearToTorahVerse.Tests.FrameworkTests
                 result.ShouldEqual(770);
             };
     }
-
 }
