@@ -19,5 +19,4 @@
 			HorizontalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="1"/>
 		</Grid>
 	</DataTemplate>
-	<!-- Resource dictionary entries should be defined here. -->
 </ResourceDictionary>
