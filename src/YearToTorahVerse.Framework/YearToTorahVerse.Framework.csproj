@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Hebrew\HebrewNumberConverter.cs" />
     <Compile Include="Hebrew\IHebrewNumberConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

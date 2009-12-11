@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="FrameworkTests\When_changing_an_int_to_a_hebrew_number.cs" />
     <Compile Include="FrameworkTests\When_changing_a_hebrew_number_to_an_int.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
