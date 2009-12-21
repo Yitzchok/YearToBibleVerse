@@ -4,6 +4,7 @@ using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.ApplicationModel;
 using YearToTorahVerse.Core;
 using YearToTorahVerse.Core.Services;
+using YearToTorahVerse.Framework.Hebrew;
 using YearToTorahVerse.Infrastructure;
 
 namespace YearToTorahVerse.Presenters
@@ -12,10 +13,12 @@ namespace YearToTorahVerse.Presenters
     public class SearchPresenter : Presenter
     {
         readonly IYearToVerseSearchService searchService;
+        readonly IHebrewNumberConverter hebrewNumberConverter;
 
-        public SearchPresenter(IYearToVerseSearchService searchService)
+        public SearchPresenter(IYearToVerseSearchService searchService, IHebrewNumberConverter hebrewNumberConverter)
         {
             this.searchService = searchService;
+            this.hebrewNumberConverter = hebrewNumberConverter;
             jewishYear = new Observable<string>("5770");
             Verses = new BindableCollection<Verse>();
         }
@@ -24,14 +27,25 @@ namespace YearToTorahVerse.Presenters
         public string JewishYear
         {
             get { return jewishYear.Value; }
-            set { jewishYear.Value = value; }
+            set
+            {
+                jewishYear.Value = value;
+                NotifyOfPropertyChange("CanSearch");
+            }
         }
 
         public IObservableCollection<Verse> Verses { get; set; }
 
         public IEnumerable<IResult> Search()
         {
-            IList<Verse> verses = searchService.Search(int.Parse(JewishYear));
+            int year;
+
+            int.TryParse(JewishYear, out year);
+
+            if (year < 1)
+                year = hebrewNumberConverter.HebrewNumberToInt(JewishYear);
+
+            IList<Verse> verses = searchService.Search(year);
 
             Verses.Clear();
             foreach (var verse in verses)
@@ -47,7 +61,10 @@ namespace YearToTorahVerse.Presenters
             get
             {
                 int hu;
-                return int.TryParse(JewishYear, out hu);
+                if (int.TryParse(JewishYear, out hu))
+                    return true;
+
+                return hebrewNumberConverter.IsValidHebrewNumber(JewishYear);
             }
         }
     }

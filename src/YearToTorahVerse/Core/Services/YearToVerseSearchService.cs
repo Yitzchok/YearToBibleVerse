@@ -30,7 +30,7 @@ namespace YearToTorahVerse.Core.Services
                     try
                     {
                         var verses = from verse in session.Linq<Verse>()
-                                     where verse.VerseIndex > jewishYear - 2 && verse.VerseIndex < jewishYear + 3
+                                     where verse.VerseIndex >= jewishYear - 2 && verse.VerseIndex < jewishYear + 3
                                      select verse;
 
                         versesToReturn = verses.ToList();

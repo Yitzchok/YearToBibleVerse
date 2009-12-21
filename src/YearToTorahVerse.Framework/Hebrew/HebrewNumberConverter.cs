@@ -19,6 +19,19 @@ namespace YearToTorahVerse.Framework.Hebrew
             return hebrewNumber.Sum(letter => hebrewChars[letter]);
         }
 
+        public bool IsValidHebrewNumber(string hebrewNumber)
+        {
+            try
+            {
+                return HebrewNumberToInt(hebrewNumber) > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
         public string IntToHebrewNumber(int number)
         {
             var builder = new StringBuilder();

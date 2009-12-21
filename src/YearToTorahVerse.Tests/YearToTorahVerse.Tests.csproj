@@ -50,7 +50,9 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="FrameworkTests\When_changing_an_int_to_a_hebrew_number.cs" />
+    <Compile Include="FrameworkTests\When_changing_a_gregorian_year_to_jewish_year.cs" />
     <Compile Include="FrameworkTests\When_changing_a_hebrew_number_to_an_int.cs" />
+    <Compile Include="FrameworkTests\When_providing_valid_hebrew_number.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

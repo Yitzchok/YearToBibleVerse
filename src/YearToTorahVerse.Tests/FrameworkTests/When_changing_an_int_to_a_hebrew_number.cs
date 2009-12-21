@@ -18,9 +18,6 @@ namespace YearToTorahVerse.Tests.FrameworkTests
             result = converter.IntToHebrewNumber(770);
         };
 
-        It should_be_the_correct_hebrew_number = () =>
-        {
-            result.ShouldEqual("תשע");
-        };
+        It should_be_the_correct_hebrew_number = () => result.ShouldEqual("תשע");
     }
 }
